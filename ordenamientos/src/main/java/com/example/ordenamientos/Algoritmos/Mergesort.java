@@ -3,7 +3,7 @@ package com.example.ordenamientos.Algoritmos;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Mergesort {
+public class Mergesort implements Ordenamiento {
 
     private Boolean termino = false;
     private List<Double> lista;
@@ -12,21 +12,6 @@ public class Mergesort {
         this.lista=lista;
     }
 
-    public void  Ordenar(){
-        while (!this.getTermino()) {
-            for (int i=0;i<this.lista.size();i+=this.paso){
-                merge(i,i+(int)(this.paso/2),i+(this.paso));
-
-                if (i == 0 && (i+this.paso)>=this.lista.size()){
-                    this.termino=true;
-                }
-            }
-            this.paso=this.paso*2;
-    }
-    }
-    public Boolean getTermino() {
-        return termino;
-    }
 
     private void merge(int inicio, int medio, int fin){
 
@@ -78,6 +63,24 @@ public class Mergesort {
         }
         return indice;
 
+    }
+
+    @Override
+    public List<Double> ordenarParcialmente() {
+        for (int i=0;i<this.lista.size();i+=this.paso){
+            merge(i,i+(int)(this.paso/2),i+(this.paso));
+            if (i == 0 && (i+this.paso)>=this.lista.size()){
+                this.termino=true;
+            }
+        }
+                this.paso=this.paso*2;
+
+        return this.lista;
+    }
+
+    @Override
+    public Boolean termino() {
+        return this.termino;
     }
 }
 
