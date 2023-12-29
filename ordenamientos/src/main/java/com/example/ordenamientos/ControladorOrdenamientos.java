@@ -1,5 +1,7 @@
 package com.example.ordenamientos;
 
+import com.example.ordenamientos.Algoritmos.Insercion;
+import com.example.ordenamientos.Algoritmos.Mergesort;
 import com.example.ordenamientos.Algoritmos.Ordenamiento;
 import com.example.ordenamientos.Algoritmos.Quick;
 import com.example.ordenamientos.Vista.VistaLista;
@@ -34,7 +36,9 @@ public class ControladorOrdenamientos extends Application {
 
        // Ordenamiento se = new Seleccion(doubles);
        // Ordenamiento se = new Burbuja(doubles);
-        Ordenamiento se = new Quick(doubles);
+        //Ordenamiento se = new Quick(doubles);
+        //Ordenamiento se = new Mergesort(doubles);
+        Ordenamiento se = new Insercion(doubles);
         FadeTransition fade = new FadeTransition();
         final int[] repeticones = {0};
         fade.setDuration(Duration.millis(500));

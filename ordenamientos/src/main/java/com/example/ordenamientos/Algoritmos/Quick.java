@@ -5,8 +5,7 @@ import java.util.List;
 
 public class Quick implements Ordenamiento {
     private double pibote;
-    private int izquierda;
-    private int derecha;
+    private int iteraciones;
     private List<Double> lista;
     private List<Double> listaMenores;
     private List<Double> listaMayores;
@@ -16,62 +15,69 @@ public class Quick implements Ordenamiento {
 
     public Quick(List<Double> lista) {
         this.lista = lista;
-        this.izquierda = 0;
-        this.pibote = lista.get(0);
-        this.derecha = lista.size()-1;
+        this.iteraciones = 0;
+        if(this.lista.size() > 0){
+            this.pibote = lista.get(0);
+        }
         this.listaMenores = new ArrayList<>();
         this.listaMayores = new ArrayList<>();
-    }
-    public Quick(){
-        this.izquierda = 0;
-        this.pibote = 0;
-        this.derecha = 0;
-    }
-    private void intercambiar(int indice1, int indice2){
-        Double valorAux = this.lista.get(indice1);
-        this.lista.remove(indice1);
-        this.lista.add(indice1, this.lista.get(indice2));
-        this.lista.remove(indice2);
-        this.lista.add(indice2, valorAux);
     }
 
     public void setLista(List<Double> lista){
         this.lista = lista;
-        this.izquierda = 0;
+        this.iteraciones = 0;
         this.pibote = lista.get(2);
-        this.derecha = lista.size()-1;
         this.listaMenores = new ArrayList<>();
         this.listaMayores = new ArrayList<>();
     }
     @Override
     public Boolean termino() {
-        return false;
+        if(this.quickMenor != null || this.quickMayor != null){
+            Boolean termino = true;
+            if(this.quickMayor != null){
+                termino &= quickMayor.termino();
+            }
+            if(this.quickMenor != null){
+                termino &= quickMenor.termino();
+            }
+            return termino;
+        }
+        return (this.lista.size() <= 1);
     }
 
     @Override
     public List<Double> ordenarParcialmente() {
-       if (this.izquierda <= this.derecha){
-           if (this.lista.get(this.izquierda) <=this.pibote){
-               this.listaMenores.add(this.lista.get(this.izquierda));
-               this.izquierda++;
-           }
-           else{
-               this.listaMayores.add(this.lista.get(this.derecha));
-               this.derecha--;
-           }
-       }
-       else {
-           if(this.izquierda != -1){
-               quickMenor  = new Quick(this.listaMenores);
-               quickMayor = new Quick(this.listaMayores);
-           }
-           this.izquierda = -1;
-           this.listaMenores = quickMenor.ordenarParcialmente();
-           this.listaMayores = quickMayor.ordenarParcialmente();
+        if (this.iteraciones <= this.lista.size()-1) {
+            if (this.lista.get(this.iteraciones) < this.pibote) {
+                this.listaMenores.add(this.lista.get(this.iteraciones));
+            }
+            else if (this.lista.get(this.iteraciones) > this.pibote){
+                this.listaMayores.add(this.lista.get(this.iteraciones));
+            }
+            this.iteraciones++;
+        }
+        else {
+            if (this.iteraciones != this.lista.size()*10) {
+                if(this.listaMayores.size() > 0){
+                    quickMayor = new Quick(this.listaMayores);
+                }
+                if(this.listaMenores.size() > 0){
+                    quickMenor = new Quick(this.listaMenores);
+                }
+            }
+            this.iteraciones = this.lista.size()*10;
+            if (quickMenor != null){
+                this.listaMenores = quickMenor.ordenarParcialmente();
+            }
+            if (this.quickMayor != null) {
+                    this.listaMayores = quickMayor.ordenarParcialmente();
+             }
        }
         List<Double> listAxuliar = new ArrayList<>();
         listAxuliar.addAll(listaMenores);
+        listAxuliar.add(pibote);
         listAxuliar.addAll(listaMayores);
+
         return listAxuliar;
     }
 }

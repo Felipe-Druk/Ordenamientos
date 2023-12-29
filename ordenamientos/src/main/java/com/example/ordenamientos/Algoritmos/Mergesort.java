@@ -25,8 +25,6 @@ public class Mergesort implements Ordenamiento {
         int i=0;
         int j=0;
 
-
-
         while (i<izq.size() && j<der.size()){
             if (izq.get(i)<der.get(j)){
                 aux.add(k,izq.get(i));
@@ -53,8 +51,6 @@ public class Mergesort implements Ordenamiento {
 
         this.lista.addAll(inicio,aux);
         this.lista.subList(fin, fin * 2 - inicio).clear();
-
-        
     }
 
     private int mantenerRango(int indice){
