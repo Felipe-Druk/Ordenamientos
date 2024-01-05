@@ -3,12 +3,12 @@ package com.example.ordenamientos.Algoritmos;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Mergesort implements Ordenamiento {
+public class MergeSort implements Ordenamiento {
 
     private Boolean termino = false;
     private List<Double> lista;
     private int paso=2;
-    public Mergesort(List<Double> lista){
+    public MergeSort(List<Double> lista){
         this.lista=lista;
     }
 

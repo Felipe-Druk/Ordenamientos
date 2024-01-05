@@ -3,7 +3,7 @@ package com.example.ordenamientos.Algoritmos;
 import java.util.List;
 import java.util.Collections;
 
-public class Heapsort implements Ordenamiento{
+public class HeapSort implements Ordenamiento{
 
     Boolean termino = false;
     List<Double> lista;
@@ -12,7 +12,7 @@ public class Heapsort implements Ordenamiento{
 
 
 
-    public Heapsort(List<Double> lista){
+    public HeapSort(List<Double> lista){
         heapify(lista);
         this.lista=lista;
         tamanioRelativo=this.lista.size()-1;

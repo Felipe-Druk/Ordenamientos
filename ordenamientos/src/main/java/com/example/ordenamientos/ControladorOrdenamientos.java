@@ -32,11 +32,13 @@ public class ControladorOrdenamientos extends Application {
         stage.show();
 
        // Ordenamiento se = new Seleccion(doubles);
-       // Ordenamiento se = new Burbuja(doubles);
+       //Ordenamiento se = new Burbuja(doubles);
         //Ordenamiento se = new Quick(doubles);
         //Ordenamiento se = new Mergesort(doubles);
         //Ordenamiento se = new Insercion(doubles);
-        Ordenamiento se = new ShellSort(doubles);
+       //Ordenamiento se = new ShellSort(doubles);
+        Ordenamiento se = new HeapSort(doubles);
+
         FadeTransition fade = new FadeTransition();
         final int[] repeticones = {0};
         fade.setDuration(Duration.millis(500));
